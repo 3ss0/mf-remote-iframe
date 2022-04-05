@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React from "react";
+import { Route, Link, Routes } from "react-router-dom";
+import Details from "./pages/details";
+import "./App.css";
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <React.Suspense fallback="Loading">
+        <Routes>
+          <Route
+            path="*"
+            element={
+              <nav>
+                <header className="App-header">
+                  Users App
+                  <Link to="details">Click here for Details</Link>
+                </header>
+              </nav>
+            }
+          />
+          <Route path="details" element={<Details />} />
+          <Route path="404" element={<h1>404 page</h1>} />
+        </Routes>
+      </React.Suspense>
     </div>
   );
 }
